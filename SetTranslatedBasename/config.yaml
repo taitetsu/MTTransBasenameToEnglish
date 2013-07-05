@@ -1,0 +1,19 @@
+id: SetTranslatedBasename
+name: <__trans phrase="Set Translated Basename">
+version: 0.1
+description: <__trans phrase="Inputted Japanese is translated by Microsoft Translator, and set to basename.">
+author_name: <__trans phrase="Taitetsu">
+author_link: http://www.hazama.nu/t2o2/
+doc_link: http://www.hazama.nu/t2o2/
+l10n_class: SetTranslatedBasename::L10N
+
+callbacks:
+#    MT::App::CMS::template_source.edit_entry: $SetTranslatedBasename::SetTranslatedBasename::hdlr_template_source_edit_entry
+#    MT::App::CMS::template_output.edit_entry: $SetTranslatedBasename::SetTranslatedBasename::hdlr_template_output_edit_entry
+    MT::App::CMS::template_param.edit_entry: $SetTranslatedBasename::SetTranslatedBasename::hdlr_template_param_edit_entry
+
+applications:
+    cms:
+        methods:
+            translate_basename:
+                code: $SetTranslatedBasename::SetTranslatedBasename::translate_basename
