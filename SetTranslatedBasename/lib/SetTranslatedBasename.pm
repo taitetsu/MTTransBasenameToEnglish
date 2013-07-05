@@ -32,8 +32,8 @@ sub hdlr_template_param_edit_entry {
       success: function(data) {
         jQuery('#basename').val(data.result)
       },
-      error: function(data) {
-        alert(data);
+      error: function(xhr, status, error) {
+        alert( trans('Translation Error (HTTP status code: [_1]. Message: [_2])', xhr.status, error) );
       }
     });
   });
