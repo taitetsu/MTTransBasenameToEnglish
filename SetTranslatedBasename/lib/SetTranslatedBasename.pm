@@ -10,7 +10,7 @@ sub hdlr_template_param_edit_entry {
     my $innerHTML = <<HTML;
 <input type="text" name="trans_text" id="trans_text" class="full-width" mt:watch-change="1" value="<mt:var name="trans_text" escape="html">" autocomplete="off" />
 <input type="button" id="translate_basename" name="translate_basename" value="Translate" />
-<script type="text/javascript">
+<mt:setvarblock name="jq_js_include" append="1">
   jQuery('#translate_basename').click( function() {
     var trans_text = jQuery('#trans_text').val();
     jQuery.ajax({
@@ -32,7 +32,7 @@ sub hdlr_template_param_edit_entry {
       }
     });
   });
-</script>
+</mt:setvarblock>
 HTML
 
     my $block_node = $tmpl->createElement(
