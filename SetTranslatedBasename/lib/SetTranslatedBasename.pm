@@ -9,8 +9,13 @@ sub hdlr_template_param_edit_entry {
     my $host_node = $tmpl->getElementById('basename');
     my $innerHTML = <<HTML;
 <input type="text" name="trans_text" id="trans_text" class="full-width" mt:watch-change="1" value="<mt:var name="trans_text" escape="html">" autocomplete="off" />
+<input type="button" id="copy_title" name="copy_title" value="Copy Title" />
 <input type="button" id="translate_basename" name="translate_basename" value="Translate" />
 <mt:setvarblock name="jq_js_include" append="1">
+  jQuery('#copy_title').click( function() {
+    jQuery('#trans_text').val( jQuery('#title').val() );
+  });
+
   jQuery('#translate_basename').click( function() {
     var trans_text = jQuery('#trans_text').val();
     jQuery.ajax({
