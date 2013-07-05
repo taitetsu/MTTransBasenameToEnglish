@@ -21,6 +21,7 @@ sub hdlr_template_param_edit_entry {
       dataType: 'json',
       data: {
         __mode: 'translate_basename',
+        blog_id: '<mt:var name="blog_id">',
         trans_text: trans_text
       },
       success: function(data) {
@@ -45,19 +46,21 @@ HTML
 
     $block_node->innerHTML( $innerHTML );
     $tmpl->insertAfter($block_node, $host_node);
-
-    #$param->{trans_text} = "Please input Japanese text." if !$param->{trans_text};
 }
 
 sub translate_basename {
     my $app = shift;
     my $trans_text = $app->param('trans_text');
+    my $blog_id = 'blog:' . $app->param('blog_id');
 
-    my $client_id = 'YOUR_CLIENT_ID';
-    my $client_secret = 'YOUR_CLIENT_SECRET';
+    my $plugin = MT->component('SetTranslatedBasename');
+
+    my $client_id     = $plugin->get_config_value('client_id', $blog_id);
+    my $client_secret = $plugin->get_config_value('client_secret', $blog_id);
+    my $lang          = $plugin->get_config_value('lang', $blog_id);
 
     my $ua = MT->new_ua;
-    $ua->agent(join '/', 'SetTranslatedBasename', $app->VERSION);
+    $ua->agent(join '/', 'SetTranslatedBasename', $plugin->version);
     $ua->timeout(10);
     my $enc = $app->config->PublishCharset;
     my $req;
@@ -77,7 +80,7 @@ sub translate_basename {
 
     my $access_token = MT::Util::from_json($res->content)->{access_token};
 
-    my $url = "http://api.microsofttranslator.com/V2/Http.svc/Translate?from=ja&to=en&text=";
+    my $url = "http://api.microsofttranslator.com/V2/Http.svc/Translate?from=" . $lang . "&to=en&text=";
     $url .= MT::Util::encode_url($trans_text);
     $ua->default_header( 'authorization' => 'Bearer ' . $access_token );
     $req = HTTP::Request->new( GET => $url );

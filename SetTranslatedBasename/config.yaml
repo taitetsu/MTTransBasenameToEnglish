@@ -7,9 +7,19 @@ author_link: http://www.hazama.nu/t2o2/
 doc_link: http://www.hazama.nu/t2o2/
 l10n_class: SetTranslatedBasename::L10N
 
+blog_config_template: setting_blog.tmpl
+settings:
+    client_id:
+        default:
+        scope: blog
+    client_secret:
+        default:
+        scope: blog
+    lang:
+        default: ja
+        scope: blog
+
 callbacks:
-#    MT::App::CMS::template_source.edit_entry: $SetTranslatedBasename::SetTranslatedBasename::hdlr_template_source_edit_entry
-#    MT::App::CMS::template_output.edit_entry: $SetTranslatedBasename::SetTranslatedBasename::hdlr_template_output_edit_entry
     MT::App::CMS::template_param.edit_entry: $SetTranslatedBasename::SetTranslatedBasename::hdlr_template_param_edit_entry
 
 applications:

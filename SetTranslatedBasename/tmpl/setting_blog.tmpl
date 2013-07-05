@@ -1,0 +1,17 @@
+<mtapp:setting id="client_id" label="<__trans phrase='Client ID'>"
+    hint="<__trans phrase="Client ID of application for Microsoft Translator API">" show_hint=1>
+    <input type="text" name="client_id" id="client_id"
+        value="<mt:GetVar name="client_id">" />
+</mtapp:setting>
+
+<mtapp:setting id="client_secret" label="<__trans phrase='Client Secret'>"
+    hint="<__trans phrase="Client Secret of application for Microsoft Translator API">" show_hint=1>
+    <input type="text" name="client_secret" id="client_secret"
+        value="<mt:GetVar name="client_secret">" />
+</mtapp:setting>
+
+<mtapp:setting id="from" label="<__trans phrase='Language'>"
+    hint="<__trans phrase="The language before translating.">" show_hint=1>
+    <input type="text" name="lang" id="lang"
+        value="<mt:GetVar name="lang">" />
+</mtapp:setting>
