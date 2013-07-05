@@ -3,27 +3,6 @@ use strict;
 
 use LWP::UserAgent;
 
-#sub hdlr_template_source_edit_entry {
-#    my ($cb, $app, $tmpl_ref) = @_;
-#    my $old = <<EOF;
-#                        <div class="tab" mt:command="set-editor-extended" mt:tab="extended">
-#                            <label><a href="javascript:void(0);"><__trans phrase="Extended"></a></label>
-#                        </div>
-#EOF
-#    $old = quotemeta($old);
-#    $old =~ s!(\\ )+!\\s+!g;
-#
-#    my $new = "";
-#
-#    $$tmpl_ref =~ s!$old!$new!;
-#}
-#
-#sub hdlr_template_output_edit_entry {
-#    my ($cb, $app, $tmpl_str_ref, $param, $tmpl) = @_;
-#
-#    # do something
-#}
-
 sub hdlr_template_param_edit_entry {
     my ($cb, $app, $param, $tmpl) = @_;
 
@@ -74,6 +53,9 @@ sub translate_basename {
     my $app = shift;
     my $trans_text = $app->param('trans_text');
 
+    my $client_id = 'YOUR_CLIENT_ID';
+    my $client_secret = 'YOUR_CLIENT_SECRET';
+
     my $ua = MT->new_ua;
     $ua->agent(join '/', 'SetTranslatedBasename', $app->VERSION);
     $ua->timeout(10);
@@ -86,8 +68,8 @@ sub translate_basename {
     $req = HTTP::Request->new( POST => "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13" );
     $req->content_type("application/x-www-form-urlencoded; charset=$enc");
     push @qs, 'grant_type=' . MT::Util::encode_url('client_credentials');
-    push @qs, 'client_id=' . MT::Util::encode_url('YOUR_CLIENT_ID');
-    push @qs, 'client_secret=' . MT::Util::encode_url('YOUR_CLIENT_SECRET');
+    push @qs, 'client_id=' . MT::Util::encode_url($client_id);
+    push @qs, 'client_secret=' . MT::Util::encode_url($client_secret);
     push @qs, 'scope=' . MT::Util::encode_url('http://api.microsofttranslator.com');
     $qs = join '&', @qs;
     $req->content($qs);
