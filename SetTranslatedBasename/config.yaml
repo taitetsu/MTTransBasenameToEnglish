@@ -1,6 +1,6 @@
 id: SetTranslatedBasename
 name: <__trans phrase="Set Translated Basename">
-version: 0.3
+version: 0.4
 description: <__trans phrase="Inputted Japanese is translated by Microsoft Translator, and set to basename.">
 author_name: <__trans phrase="Taitetsu">
 author_link: http://www.hazama.nu/t2o2/
