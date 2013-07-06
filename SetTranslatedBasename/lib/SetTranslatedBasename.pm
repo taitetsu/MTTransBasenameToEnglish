@@ -7,51 +7,12 @@ sub hdlr_template_param_edit_entry {
     my ($cb, $app, $param, $tmpl) = @_;
 
     my $host_node = $tmpl->getElementById('basename');
-    my $innerHTML = <<HTML;
-<input type="text" name="trans_text" id="trans_text" class="full-width" mt:watch-change="1" value="<mt:var name="trans_text" escape="html">" autocomplete="off" />
-<input type="button" id="copy_title" name="copy_title" value="Copy Title" />
-<input type="button" id="translate_basename" name="translate_basename" value="Translate" />
-<mt:setvarblock name="jq_js_include" append="1">
-  jQuery('#copy_title').click( function() {
-    jQuery('#trans_text').val( jQuery('#title').val() );
-  });
 
-  jQuery('#translate_basename').click( function() {
-    var trans_text = jQuery('#trans_text').val();
-    jQuery.ajax({
-      type: 'POST',
-      contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-      async: true,
-      url: '<mt:var name="script_url">',
-      dataType: 'json',
-      data: {
-        __mode: 'translate_basename',
-        blog_id: '<mt:var name="blog_id">',
-        trans_text: trans_text
-      },
-      success: function(data) {
-        jQuery('#basename').val(data.result)
-        jQuery('#basename').prev().text(data.result)
-      },
-      error: function(xhr, status, error) {
-        alert( trans('Translation Error (HTTP status code: [_1]. Message: [_2])', xhr.status, error) );
-      }
-    });
-  });
-</mt:setvarblock>
-HTML
+    my $plugin = MT->component('SetTranslatedBasename');
+    my $tmpl_file = File::Spec->catdir($plugin->path, 'tmpl', 'include', 'transformer_trans_text.tmpl');
+    my $include_node = $tmpl->createElement( 'include', { name => $tmpl_file, });
 
-    my $block_node = $tmpl->createElement(
-        'app:setting',
-        {
-            id => 'trans_text',
-            label => 'Japanese',
-            label_class => 'top-label',
-        }
-    );
-
-    $block_node->innerHTML( $innerHTML );
-    $tmpl->insertAfter($block_node, $host_node);
+    $tmpl->insertAfter($include_node, $host_node);
 }
 
 sub translate_basename {
