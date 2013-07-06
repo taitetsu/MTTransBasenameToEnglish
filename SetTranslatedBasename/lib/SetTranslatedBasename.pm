@@ -20,6 +20,7 @@ sub config_template {
         $row{selected} = 1 if $selected_lang eq $code;
         push @language_codes, \%row;
     }
+    @language_codes = sort { $a->{name} cmp $b->{name} } @language_codes;
 
     $plugin->load_tmpl(
         $prefix . '_setting.tmpl',
