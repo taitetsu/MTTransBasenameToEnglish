@@ -7,8 +7,10 @@ author_link: http://www.hazama.nu/t2o2/
 doc_link: http://www.hazama.nu/t2o2/
 l10n_class: SetTranslatedBasename::L10N
 
-system_config_template: setting_system.tmpl
-blog_config_template: setting_blog.tmpl
+system_config_template:
+    code: $SetTranslatedBasename::SetTranslatedBasename::config_template
+blog_config_template:
+    code: $SetTranslatedBasename::SetTranslatedBasename::config_template
 settings:
     system_client_id:
         default:
@@ -37,3 +39,46 @@ applications:
         methods:
             translate_basename:
                 code: $SetTranslatedBasename::SetTranslatedBasename::translate_basename
+
+set_translated_basename_language_codes:
+    ar: Arabic
+    bg: Bulgarian
+    ca: Catalan
+    zh-CHS: Chinese (Simplified)
+    zh-CHT: Chinese (Traditional)
+    cs: Czech
+    da: Danish
+    nl: Dutch
+    en: English
+    et: Estonian
+    fa: Persian (Farsi)
+    fi: Finnish
+    fr: French
+    de: German
+    el: Greek
+    ht: Haitian Creole
+    he: Hebrew
+    hi: Hindi
+    hu: Hungarian
+    id: Indonesian
+    it: Italian
+    ja: Japanese
+    ko: Korean
+    lv: Latvian
+    lt: Lithuanian
+    ms: Malay
+    mww: Hmong Daw
+    no: Norwegian
+    pl: Polish
+    pt: Portuguese
+    ro: Romanian
+    ru: Russian
+    sk: Slovak
+    sl: Slovenian
+    es: Spanish
+    sv: Swedish
+    th: Thai
+    tr: Turkish
+    uk: Ukrainian
+    ur: Urdu
+    vi: Vietnamese

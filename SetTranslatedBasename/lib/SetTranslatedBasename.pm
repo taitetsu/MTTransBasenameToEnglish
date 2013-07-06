@@ -3,6 +3,30 @@ use strict;
 
 use LWP::UserAgent;
 
+sub config_template {
+    my ( $plugin, $config, $scope ) = @_;
+
+    my ($prefix) = split ':', $scope;
+    my $selected_lang
+        = $plugin->get_config_value( $prefix . '_lang', $scope );
+
+    my $lcs = MT->registry("set_translated_basename_language_codes");
+    my @language_codes;
+    foreach my $code ( keys %$lcs ) {
+        my %row = (
+            code => $code,
+            name => $lcs->{$code},
+        );
+        $row{selected} = 1 if $selected_lang eq $code;
+        push @language_codes, \%row;
+    }
+
+    $plugin->load_tmpl(
+        $prefix . '_setting.tmpl',
+        { language_codes => \@language_codes },
+    );
+}
+
 sub hdlr_template_param_edit_entry {
     my ( $cb, $app, $param, $tmpl ) = @_;
 
