@@ -7,15 +7,25 @@ author_link: http://www.hazama.nu/t2o2/
 doc_link: http://www.hazama.nu/t2o2/
 l10n_class: SetTranslatedBasename::L10N
 
+system_config_template: setting_system.tmpl
 blog_config_template: setting_blog.tmpl
 settings:
-    client_id:
+    system_client_id:
+        default:
+        scope: system
+    system_client_secret:
+        default:
+        scope: system
+    system_lang:
+        default: ja
+        scope: system
+    blog_client_id:
         default:
         scope: blog
-    client_secret:
+    blog_client_secret:
         default:
         scope: blog
-    lang:
+    blog_lang:
         default: ja
         scope: blog
 

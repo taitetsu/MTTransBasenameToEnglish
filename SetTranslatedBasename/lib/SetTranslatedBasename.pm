@@ -22,9 +22,12 @@ sub translate_basename {
 
     my $plugin = MT->component('SetTranslatedBasename');
 
-    my $client_id     = $plugin->get_config_value('client_id', $blog_id);
-    my $client_secret = $plugin->get_config_value('client_secret', $blog_id);
-    my $lang          = $plugin->get_config_value('lang', $blog_id);
+    my $client_id     = $plugin->get_config_value('blog_client_id',     $blog_id);
+    my $client_secret = $plugin->get_config_value('blog_client_secret', $blog_id);
+    my $lang          = $plugin->get_config_value('blog_lang',          $blog_id);
+    $client_id     = $plugin->get_config_value('system_client_id',     'system') unless $client_id;
+    $client_secret = $plugin->get_config_value('system_client_secret', 'system') unless $client_secret;
+    $lang          = $plugin->get_config_value('system_lang',          'system') unless $lang;
 
     my $ua = MT->new_ua;
     $ua->agent(join '/', 'SetTranslatedBasename', $plugin->version);
