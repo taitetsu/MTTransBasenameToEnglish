@@ -68,9 +68,9 @@ sub translate_basename {
     my $result = $res->content;
     $result =~ s/<.*?>//g;
     $result = lc($result);
+    $result =~ s/('|\.|=)//g;
     $result =~ s/\s/_/g;
-    $result =~ s/'//g;
-    $result =~ s/\.//g;
+    $result =~ s/__/_/g;
     return $app->json_result($result);
 }
 
