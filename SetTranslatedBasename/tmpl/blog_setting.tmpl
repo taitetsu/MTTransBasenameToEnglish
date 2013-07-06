@@ -10,8 +10,9 @@
         value="<mt:GetVar name="blog_client_secret">" />
 </mtapp:setting>
 
+<mt:setvarblock name="lang_hint"><__trans phrase="The language before translating. (This list is created based on <a target="_blank" href="http://msdn.microsoft.com/en-us/library/hh456380.aspx">this page</a>.)" /></mt:setvarblock>
 <mtapp:setting id="from" label="<__trans phrase='Language'>"
-    hint="<__trans phrase="The language before translating.">" show_hint=1>
+    hint="$lang_hint" show_hint=1>
     <select name="system_lang" id="system_lang">
     <mt:loop name="language_codes">
         <option value="<mt:var name="code">"<mt:if name="selected"> selected="selected"</mt:if>>
