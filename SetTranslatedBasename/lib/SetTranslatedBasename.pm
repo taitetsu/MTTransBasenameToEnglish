@@ -78,7 +78,8 @@ sub translate_basename {
     $req->content($qs);
     $res = $ua->request($req);
 
-    my $access_token = MT::Util::from_json( $res->content )->{access_token};
+    require JSON;
+    my $access_token = JSON::from_json( $res->content )->{access_token};
 
     my $url
         = "http://api.microsofttranslator.com/V2/Http.svc/Translate?from="
