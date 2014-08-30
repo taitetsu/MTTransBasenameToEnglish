@@ -30,8 +30,12 @@ sub config_template {
 
 sub hdlr_template_param_edit_entry {
     my ( $cb, $app, $param, $tmpl ) = @_;
+    my $blog_id = 'blog:' . $app->param('blog_id');
 
     my $host_node = $tmpl->getElementById('basename');
+
+    my ( $client_id, $client_secret, $lang ) = _get_config($blog_id);
+    $param->{stb_configured} = 1 if ( $client_id && $client_secret && $lang );
 
     my $plugin    = MT->component('SetTranslatedBasename');
     my $tmpl_file = File::Spec->catdir( $plugin->path, 'tmpl', 'include',
@@ -49,13 +53,7 @@ sub translate_basename {
 
     my $plugin = MT->component('SetTranslatedBasename');
 
-    my $client_id = $plugin->get_config_value( 'blog_client_id', $blog_id )
-        || $plugin->get_config_value( 'system_client_id', 'system' );
-    my $client_secret
-        = $plugin->get_config_value( 'blog_client_secret', $blog_id )
-        || $plugin->get_config_value( 'system_client_secret', 'system' );
-    my $lang = $plugin->get_config_value( 'blog_lang', $blog_id )
-        || $plugin->get_config_value( 'system_lang', 'system' );
+    my ( $client_id, $client_secret, $lang ) = _get_config($blog_id);
 
     my $ua = MT->new_ua;
     $ua->agent( join '/', 'SetTranslatedBasename', $plugin->version );
@@ -98,6 +96,21 @@ sub translate_basename {
     $result =~ s/(\s|-)/_/g;
     $result =~ s/__/_/g;
     return $app->json_result($result);
+}
+
+sub _get_config {
+    my $blog_id = shift;
+    my $plugin  = MT->component('SetTranslatedBasename');
+
+    my $client_id = $plugin->get_config_value( 'blog_client_id', $blog_id )
+        || $plugin->get_config_value( 'system_client_id', 'system' );
+    my $client_secret
+        = $plugin->get_config_value( 'blog_client_secret', $blog_id )
+        || $plugin->get_config_value( 'system_client_secret', 'system' );
+    my $lang = $plugin->get_config_value( 'blog_lang', $blog_id )
+        || $plugin->get_config_value( 'system_lang', 'system' );
+
+    return ( $client_id, $client_secret, $lang );
 }
 
 1;
