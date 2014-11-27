@@ -4,7 +4,7 @@ version: 0.6
 description: <__trans phrase="Entry title or inputted string is translated by Microsoft Translator, and set to basename.">
 author_name: <__trans phrase="Taitetsu">
 author_link: http://www.hazama.nu/t2o2/
-doc_link: http://www.hazama.nu/t2o2/
+doc_link: https://github.com/taitetsu/MTTransBasenameToEnglish/blob/master/README.md
 l10n_class: MTTransBasenameToEnglish::L10N
 
 system_config_template:
