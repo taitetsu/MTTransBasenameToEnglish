@@ -15,10 +15,14 @@ This plug-in uses Microsoft Translator as a translation engine.
 
 ##How to Use
 
+###Plugin Settings
+
 1. Go to System/Website/blog -> Tools -> Plugins screen.
 2. Click this plugin's name and click "Settings".
 3. Input Client ID and Client Secret.
 4. Click "Save changes" button.
+
+###Edit Entry
 
 1. Go to Edit Entry screen.
 2. Input string to "String to translate" textbox.
