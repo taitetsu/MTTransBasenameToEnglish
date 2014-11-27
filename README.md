@@ -32,8 +32,8 @@ This plug-in uses Microsoft Translator as a translation engine.
 
 ##Specification
 
-1. HTML tag is removed.
-2. Single quote, dot, equal and comma is removed.
-3. Blank is replaced to underscore.
-4. Double underscore is replaced to single.
-5. "Translatie" button overwrites basename.
++ HTML tag is removed.
++ Single quote, dot, equal and comma is removed.
++ Blank is replaced to underscore.
++ Double underscore is replaced to single.
++ "Translatie" button overwrites basename.
