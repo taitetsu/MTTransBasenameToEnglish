@@ -81,4 +81,4 @@ set_translated_basename_language_codes:
     tr: Turkish
     uk: Ukrainian
     ur: Urdu
-    vi: Vietnamese
+    "vi": Vietnamese
