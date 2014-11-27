@@ -1,4 +1,4 @@
-package SetTranslatedBasename;
+package MTTransBasenameToEnglish;
 use strict;
 
 use LWP::UserAgent;
@@ -37,7 +37,7 @@ sub hdlr_template_param_edit_entry {
     my ( $client_id, $client_secret, $lang ) = _get_config($blog_id);
     $param->{stb_configured} = 1 if ( $client_id && $client_secret && $lang );
 
-    my $plugin    = MT->component('SetTranslatedBasename');
+    my $plugin    = MT->component('MTTransBasenameToEnglish');
     my $tmpl_file = File::Spec->catdir( $plugin->path, 'tmpl', 'include',
         'transformer_trans_text.tmpl' );
     my $include_node
@@ -51,12 +51,12 @@ sub translate_basename {
     my $trans_text = $app->param('trans_text');
     my $blog_id    = 'blog:' . $app->param('blog_id');
 
-    my $plugin = MT->component('SetTranslatedBasename');
+    my $plugin = MT->component('MTTransBasenameToEnglish');
 
     my ( $client_id, $client_secret, $lang ) = _get_config($blog_id);
 
     my $ua = MT->new_ua;
-    $ua->agent( join '/', 'SetTranslatedBasename', $plugin->version );
+    $ua->agent( join '/', 'MTTransBasenameToEnglish', $plugin->version );
     $ua->timeout(10);
     my $enc = $app->config->PublishCharset;
     my $req;
@@ -100,7 +100,7 @@ sub translate_basename {
 
 sub _get_config {
     my $blog_id = shift;
-    my $plugin  = MT->component('SetTranslatedBasename');
+    my $plugin  = MT->component('MTTransBasenameToEnglish');
 
     my $client_id = $plugin->get_config_value( 'blog_client_id', $blog_id )
         || $plugin->get_config_value( 'system_client_id', 'system' );
