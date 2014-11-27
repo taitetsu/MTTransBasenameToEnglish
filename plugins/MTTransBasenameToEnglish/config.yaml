@@ -1,16 +1,16 @@
-id: SetTranslatedBasename
-name: <__trans phrase="Set Translated Basename">
+id: MTTransBasenameToEnglish
+name: <__trans phrase="Translate Basename to English">
 version: 0.6
-description: <__trans phrase="Inputted Japanese is translated by Microsoft Translator, and set to basename.">
+description: <__trans phrase="Entry title or inputted string is translated by Microsoft Translator, and set to basename.">
 author_name: <__trans phrase="Taitetsu">
 author_link: http://www.hazama.nu/t2o2/
 doc_link: http://www.hazama.nu/t2o2/
-l10n_class: SetTranslatedBasename::L10N
+l10n_class: MTTransBasenameToEnglish::L10N
 
 system_config_template:
-    code: $SetTranslatedBasename::SetTranslatedBasename::config_template
+    code: $MTTransBasenameToEnglish::MTTransBasenameToEnglish::config_template
 blog_config_template:
-    code: $SetTranslatedBasename::SetTranslatedBasename::config_template
+    code: $MTTransBasenameToEnglish::MTTransBasenameToEnglish::config_template
 settings:
     system_client_id:
         default:
@@ -32,13 +32,13 @@ settings:
         scope: blog
 
 callbacks:
-    MT::App::CMS::template_param.edit_entry: $SetTranslatedBasename::SetTranslatedBasename::hdlr_template_param_edit_entry
+    MT::App::CMS::template_param.edit_entry: $MTTransBasenameToEnglish::MTTransBasenameToEnglish::hdlr_template_param_edit_entry
 
 applications:
     cms:
         methods:
             translate_basename:
-                code: $SetTranslatedBasename::SetTranslatedBasename::translate_basename
+                code: $MTTransBasenameToEnglish::MTTransBasenameToEnglish::translate_basename
 
 set_translated_basename_language_codes:
     ar: Arabic
